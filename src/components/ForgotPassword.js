@@ -10,10 +10,10 @@ import {Link} from 'react-router-dom'
 export default function ForgotPassword ( ) {
 
 const emailRef =  useRef()
-const passwordRef = useRef()
+// const passwordRef = useRef()
 const { resetPassword } = useAuth()
 const [error,setError] = useState("")
-const [message,setMessage] = useState()
+const [message,setMessage] = useState("")
 const [loading,setLoading] = useState(false)
 // const history = useHistory()
 
@@ -31,7 +31,7 @@ async function handleSubmit(e) {
      setLoading(true)
 //  await login(emailRef.current.value,passwordRef.current.value)
 await resetPassword(emailRef.current.value)
-setMessage = ("Check your inbox for email")
+setMessage  ("Check your inbox for password reset")
 //  history.push('/')
    } catch {
      setError("Failed to reset ")
@@ -63,7 +63,7 @@ setMessage = ("Check your inbox for email")
       </Button>
     </Form>
     <div className="w-100 text-center mt-3">
-  <Link to= "login">Forgot Password?</Link>
+  <Link to= "login">Log In</Link>
     </div>
   </Card.Body>
 </Card>

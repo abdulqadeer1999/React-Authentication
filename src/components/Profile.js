@@ -12,8 +12,9 @@ export default function UpdateProfile ( ) {
 const emailRef =  useRef()
 const passwordRef = useRef()
 const passwordConfirmRef = useRef()
-const { currentUser,UpdateEmail,UpdatePassword } = useAuth()
+const { currentUser,updatePassword,updateEmail } = useAuth()
 const [error,setError] = useState("")
+const [message,setMessage] = useState()
 const [loading,setLoading] = useState(false)
 const history = useHistory()
 
@@ -28,12 +29,17 @@ const history = useHistory()
   setLoading(true)
   setError ("")
   if(emailRef.current.value !== currentUser.email){
-    promises.push(UpdateEmail(emailRef.current.value))
+    promises.push(updateEmail(emailRef.current.value))
   } if (passwordRef.current.value){
-      promises.push(UpdatePassword(passwordRef.current.value))
+      promises.push(updatePassword(passwordRef.current.value))
+  
+     
   }
+  setMessage("Profile updated successfully")
+ 
 
-  promises.all(promises).then(() => {
+  Promise.all(promises).then(() => {
+    
       history.push('/')
   }).catch (() => {
       setError("Failed to update account")
